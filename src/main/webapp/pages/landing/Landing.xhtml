@@ -17,15 +17,25 @@
 </h:head>
 <h:body>
     <f:view>
-        <h:outputLabel value="Welcome, User" styleClass="text-2xl"/>
+        <h:outputLabel value="Welcome, Ainamaani" styleClass="text-2xl"/>
 
         <hr/>
 
         <div>
-            <h:outputText value="Please Click this button"/>
+            <h:outputText value="Please click this button"/>
             <br/>
             <p:button id="toDashboardButton" icon="pi pi-check" value="Navigate to Dashboard"
                       outcome="/pages/dashboard/Dashboard.xhtml"/>
+            <p:button id="toDashboard" icon="pi pi-check" value="Navigate to Actual Dashboard"
+            outcome="/pages/Dashboard.xhtml"/>
+            <p:button id="toTransactionButton" icon="pi pi-check" value="Navigate to Transaction"
+            outcome="/pages/Transaction.xhtml"/>
+            <p:button id="toHomePageButton" icon="pi pi-check" value="Navigate to Home page"
+            outcome="/pages/Homepage.xhtml"/>
+            <p:button id="toLoginButton" icon="pi pi-check" value="Navigate to Login page"
+            outcome="/pages/Login.xhtml"/>
+            <p:button id="toRegisterButton" icon="pi pi-check" value="Navigate to Registration page"
+            outcome="/pages/Register.xhtml"/>
         </div>
     </f:view>
 </h:body>
