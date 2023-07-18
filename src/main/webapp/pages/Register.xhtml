@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <style>
+            
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+
+}
+body{
+    background: #f2f2f2;
+}
+.navbar{
+    background: #fff;
+    display: flex;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;   
+    padding: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .navbar h4{
+    font-size: 1.3em;
+    border-bottom: 4px solid var(--blue);
+    font-style: italic;
+  }
+  .links ul{
+    display: flex;
+    gap: 15px;
+    list-style-type: none;
+  }
+ 
+  .links ul li a{
+    color: #000;
+    text-decoration: none;
+    border-bottom: 3px solid #008CBA;
+    border-radius: 4px;
+    padding: 5px;
+  }
+  .links ul li a:hover{
+    background: #008CBA;
+    color: #fff;
+  }
+.form-box{
+    width: 850px;
+    position: absolute;
+    top:65%; 
+    left: 50%;
+    background: #fff;
+    padding: 50px 60px 70px;
+    text-align: center;
+    transform: translate(-50%,-20%);
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+
+}
+.form-box h1{
+    font-size: 30px;
+    margin-bottom: 60px;
+    position: relative;
+    color: #008CBA;
+}
+.form-box h1::after{
+    content: '';
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: #008CBA;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.input-field{
+    background: #eaeaea;
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+
+form p{
+    text-align: left;
+    font-size: 13px;
+}
+form p a{
+    text-decoration: none;
+    color: #3c0000;
+}
+.btn-field{
+    width: 100%;
+    padding: 15px;
+}
+.btn-field .button{
+    background: #008CBA;
+    color: #fff;
+    border-radius: 4px;
+    padding: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: 1s;  
+}
+.category-head{
+    text-align: left !important;
+    color: #008CBA;
+}
+.category{
+    text-align: left;
+}
+
+/* REGISTER */
+.label{
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+.gridarea{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 15px;
+}
+.input,.select{
+    width: 380px;
+    border: 0px;
+    background: #f2f2f2;
+    padding: 7px;
+    border-radius: 4px;
+    outline-color: #999;
+}
+
+
+
+        </style>
+    </f:facet>
+</h:head>
+<h:body>
+    <f:view>
+        <div class="navbar">
+            <div class="logo">
+                <p:graphicImage library="images" name="Screenshot (486).png" alt="logo" width="160" height="100" />
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="Dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="Login.xhtml">Login</a></li>
+                    <li><a href="Register.xhtml">Apply</a></li>
+                </ul>
+            </div>
+        </div>
+        <h:form>
+    <div class="container">
+        <div class="form-box">
+            <h1>Member application form</h1>
+            <div class="member-info">
+                <div class="category">
+                    <h3 class="category-head">1.Personal Information</h3>
+                    <div class="gridarea">
+                        <div class="one">
+                            <h:outputLabel for="fullname" value="Full name" class="label" />
+                            <h:inputText id="fullname" placeholder="Enter your full name" class="input" />
+                            <h:outputLabel for="gender" value="Gender" class="label" />
+                            <h:selectOneMenu id="gender" value="#{bean.gender}" class="select">
+                                <f:selectItem itemLabel="Select gender" itemValue="" class="option" />
+                                <f:selectItem itemLabel="Male" itemValue="male" class="option" />
+                                <f:selectItem itemLabel="Female" itemValue="female" class="option" />
+                            </h:selectOneMenu>
+                            <h:outputLabel for="dob" value="Date of birth" class="label" />
+                            <h:inputText id="dob" type="date" placeholder="DD-MM-YYYY" class="input" />
+                            <h:outputLabel for="nationality" value="Nationality" class="label" />
+                            <h:selectOneMenu id="nationality" value="#{bean.nationality}" class="select">
+                                <f:selectItem itemLabel="Ugandan" itemValue="Ugandan" class="option" />
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="two">
+                            <h:outputLabel for="address" value="Residential Address" class="label" />
+                            <h:inputText id="address" placeholder="Enter your address" class="input" />
+                            <h:outputLabel for="email" value="Email" class="label" />
+                            <h:inputText id="email" type="email" placeholder="Enter your Email" class="input" />
+                            <h:outputLabel for="contact" value="Phone number" class="label" />
+                            <h:inputText id="contact" placeholder="Enter your phone number" class="input" />
+                        </div>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3 class="category-head">2.Employment and Income details</h3>
+                    <div class="gridarea">
+                        <div class="one">
+                            <h:outputLabel for="status" value="Employment Status" class="label" />
+                            <h:selectOneMenu id="status" value="#{bean.employmentStatus}" class="select">
+                                <f:selectItem itemLabel="Select employment status" itemValue="" class="option" />
+                                <f:selectItem itemLabel="Employed" itemValue="Employed" class="option" />
+                                <f:selectItem itemLabel="Unemployed" itemValue="Unemployed" class="option" />
+                                <f:selectItem itemLabel="Self-employed" itemValue="Self-employed" class="option" />
+                            </h:selectOneMenu>
+                            <h:outputLabel for="current" value="Current occupation" class="label" />
+                            <h:inputText id="current" class="input" />
+                            <h:outputLabel for="employer" value="Employer's name" class="label" />
+                            <h:inputText id="employer" class="input" />
+                        </div>
+                        <div class="two">
+                            <h:outputLabel for="employerEmail" value="Employer's email" class="label" />
+                            <h:inputText id="employerEmail" class="input" />
+                            <h:outputLabel for="employerContact" value="Employer's phone contact" class="label" />
+                            <h:inputText id="employerContact" class="input" />
+                        </div>
+                    </div>
+                </div>
+                <div class="category">
+                    <h3 class="category-head">3.Next of kin</h3>
+                    <div class="gridarea">
+                        <div class="one">
+                            <h:outputLabel for="kinName" value="Next of kin" class="label" />
+                            <h:inputText id="kinName" class="input" />
+                            <h:outputLabel for="kinEmail" value="Next of kin's email" class="label" />
+                            <h:inputText id="kinEmail" class="input" />
+                        </div>
+                        <div class="two">
+                            <h:outputLabel for="kinContact" value="Next of kin's phone contact" class="label" />
+                            <h:inputText id="kinContact" class="input" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-field">
+                <h:commandButton class="button" value="Apply" />
+            </div>
+        </div>
+    </div>
+</h:form>
+    
+    </f:view>
+</h:body>
+</html>

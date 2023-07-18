@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    display: flex;
+}
+.sidebar{
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    color: #fff;
+    overflow: hidden;
+    transition: all 0.5s linear;
+    background: rgba(113, 99, 186, 255);
+}
+.sidebar:hover{
+    width: 240px;
+    transition: 0.5s;
+}
+.logo{
+    height: 80px;
+    padding: 16px;
+}
+.menu li{
+    padding: 0.5rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+.menu li:hover, .active{
+    background: #e0e0e058;
+}
+.menu a{
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+.menu a span{
+    overflow: hidden;
+}
+ul{
+    list-style: none;
+}
+menu a i{
+    font-size: 1.2rem;
+}
+.logout{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* BODY */
+.main--content{
+    position: relative;
+    background: #ebe9e9;
+    width: 100%;
+    padding: 0.8rem;
+}
+.header--wrapper img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.header--wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 1.7rem;
+    margin-bottom: 0.8rem;
+}
+.header--title{
+    color: rgba(113, 99, 186, 255);
+}
+.user--info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.search--box{
+    background: rgb(237, 237, 237);
+    border-radius: 15px;
+    color: rgba(113, 99, 186, 255);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+}
+.search--box input{
+    background: transparent;
+    padding: 10px;
+}
+.search--box i{
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.search--box i:hover{
+    transform: scale(1.2);
+}
+
+/* CARD CONTAINER */
+
+.card--container{
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+}
+.card--wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.main--title{
+    color: rgba(113, 99, 186, 255);
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+.payment--card{
+    background: rgb(229, 223, 233);
+    border-radius: 10px;
+    padding: 1.2rem;
+    width: 290px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease-in-out;
+}
+.payment--card:hover{
+    transform: translateY(-5px);
+}
+.card--header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.amount{
+    display: flex;
+    flex-direction: column;
+}
+.title{
+    font-size: 12px;
+    font-weight: 200;
+}
+.amount--value{
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+.icon{
+    color: #fff;
+    padding: 0.8rem;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    background: red;
+}
+.card-detail{
+    font-size: 18px;
+    color: #777777;
+    letter-spacing: 2px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* COLORS CSS */
+.light-red{
+    background: rgb(251, 233, 233);
+}
+.light-purple{
+    background: rgb(254, 226, 254);
+}
+.light-green{
+    background: rgb(254, 226, 254);
+}
+.light-blue{
+    background: rgb(254, 226, 254);
+}
+.dark-red{
+    background: red;
+}
+.dark-purple{
+    background: purple;
+}
+.dark-green{
+    background: green;
+}
+.dark-blue{
+    background: blue;
+}
+
+/* TABLE SECTION */
+.tabular--wrapper{
+    background: #fff;
+    margin-top: 1 rem;
+    border-radius: 10px;
+    padding: 2rem;
+}
+.table-container{
+    width: 100%;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+thead{
+    background: rgba(113, 99, 186, 255);
+    color: #fff;
+}
+th{
+    padding: 15px;
+    text-align: left;
+}
+tbody{
+    background: #f2f2f2;
+}
+td{
+    padding: 15px;
+    font-size: 14px;
+    color: #333;
+}
+tr:nth-child(even){
+    background: #fff;
+}
+tfoot{
+    background: rgba(113, 99, 186, 255);
+    font-weight: bold;
+    color: #fff;
+}
+tfoot td{
+    padding: 15px;
+    color: #fff;
+}
+.table-container button{
+    color: green;
+    background: none;
+    cursor: pointer;
+}
+.form-container{
+    background: #fff;
+    padding: 10px;
+    justify-content: center;
+    height: 380px;
+    border-radius: 8px;
+}
+.label{
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.input,.select{
+    background: #f2f2f2;
+    border-radius: 3px;
+    padding: 9px;
+    width: 250px;
+}
+.transacbutton{
+    background: rgba(113, 99, 186, 255);
+    display: block;
+    padding: 8px;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 14px;
+}
+.form-content{
+    position: relative;
+    left: 10px;
+}
+.form-content h2{
+    text-align: center;
+}
+  
+        </style>
+    </f:facet>
+</h:head>
+<h:body>
+    <f:view>
+        <div class="sidebar">
+            <div class="logo"></div>
+            <ul class="menu">
+                <li >
+                    <h:link>
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h:outputText value="Dashboard" />
+                    </h:link>
+                </li>
+                
+                <li>
+                    <h:link>
+                        <i class="fas fa-user"></i>
+                        <h:outputText value="Profile" />
+                    </h:link>
+                </li>
+                <li class="active">
+                    <h:link>
+                        <i class="fas fa-exchange-alt"></i>
+                        <h:outputText value="Make Transaction" />
+                    </h:link>
+                </li>
+                <li>
+                    <h:link>
+                        <i class="fas fa-star"></i>
+                        <h:outputText value="Testimonials" />
+                    </h:link>
+                </li>
+                <li>
+                    <h:link>
+                        <i class="fas fa-cog"></i>
+                        <h:outputText value="Settings" />
+                    </h:link>
+                </li>
+                <li class="logout">
+                    <h:link>
+                        <i class="fas fa-sign-out-alt"></i>
+                        <h:outputText value="Log out" />
+                    </h:link>
+                </li>
+            </ul>
+        </div>
+        <div class="main--content">
+            <div class="header--wrapper">
+                <div class="header--title">
+                    <h:outputText value="Kimwanyi" />
+                    <h2>SACCO</h2>
+                </div>
+                <div class="user--info">
+                    <div class="search--box">
+                        <i class="fa-solid fa-search"></i>
+                        <h:inputText placeholder="Search" />
+                    </div>
+                    <h:graphicImage url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJs2eTPW2hNKXRzhLOKaFPhG3K6lW4JxTAKQ&amp;usqp=CAU" alt="" />
+                </div>
+            </div>
+            <!-- CONTENT STARTS HERE -->
+        <div class="transaction">
+            <div class="form-container">
+                <div class="form-content">
+                    <h2>Make a transaction</h2>
+                    <h:form>
+                        <h:outputLabel class="label" for="type" value="Transaction type" />
+                        <h:selectOneMenu class="select" id="type" value="#{bean.transactionType}">
+                            <f:selectItem class="option" itemLabel="Select type of transaction" itemValue="select" />
+                            <f:selectItem class="option" itemLabel="Deposit" itemValue="deposit" />
+                            <f:selectItem class="option" itemLabel="Make withdraw" itemValue="withdraw" />
+                        </h:selectOneMenu>
+                        <h:outputLabel class="label" for="amount" value="Enter amount" />
+                        <h:inputText class="input" id="amount" value="#{bean.amount}" />
+                        <h:commandButton class="transacbutton" value="Make transaction" action="#{bean.makeTransaction}" />
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+    </f:view>
+</h:body>
+</html>
