@@ -16,6 +16,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>pages/landing/Landing.xhtml</welcome-file>
+        <welcome-file>pages/Homepage.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
