@@ -73,7 +73,7 @@ public class TransactionBean {
             if (amount > currentBalance) {
                 // Display a growl message to inform the user that they can't withdraw more than their balance
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Withdrawal amount exceeds account balance!", null));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid transaction!", "Withdrawal amount exceeds your account balance!"));
                 return;
             }
         }
@@ -92,7 +92,7 @@ public class TransactionBean {
         transaction.setAccountBalance(currentBalance);
     
         // Call the service method to create the transaction
-        transactionService.makeTransaction(transactionType, amount, userEmail);
+        transactionService.makeTransaction(transactionType, amount, userEmail,currentBalance);
     
         transaction.setTransactionType(null);
         transaction.setAmount(0.0);

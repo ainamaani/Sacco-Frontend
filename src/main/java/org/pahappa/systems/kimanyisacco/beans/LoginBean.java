@@ -53,13 +53,13 @@ public class LoginBean {
             } else {
                 // Show an error message if login fails
                 FacesContext.getCurrentInstance().addMessage("loginButton",
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid credentials", null));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid credentials", "The entered credentials are not correct."));
                 return null;
             }
     
         } else if (membershipStatus != null && !membershipStatus.equals("Approved")) {
             FacesContext.getCurrentInstance().addMessage("loginButton",
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Your membership is not approved yet", null));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Membership not approved yet", "Please wait till your membership has been approved, you will be notified by an email.Thanks"));
             return null;
         } else {
             // Show an error message if the email is not found in the database

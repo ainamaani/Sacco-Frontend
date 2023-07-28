@@ -42,6 +42,7 @@ body{
     border-radius: 10px;
     padding: 10px 1.7rem;
     margin-bottom: 0.8rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 .header--title{
     color: #008CBA;
@@ -84,7 +85,8 @@ li{
     border-radius: 6px;
     position: relative;
     right: 45px;
-    border-left: 4px solid #00ba79;
+    border-left: 4px solid #008CBA;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 
 }
 .button{
@@ -93,17 +95,20 @@ li{
     color: #fff;
     border: none;
     outline: none;
+    cursor: pointer;
+    margin-right: 20px;
 }
 .button:hover{
     background: #acdbeb;
     color: #a69898;
 }
 .disabled-button {
-  background: rgb(15, 158, 77); 
+  background: #a1d4e6; 
   padding: 7px;
     color: #fff;
     border: none;
     outline: none;
+    cursor: not-allowed;
   
 }
 .heading{
@@ -147,7 +152,6 @@ li{
     <p:dialog id="warnDialog" widgetVar="warnDialog" header="Warning" modal="true" resizable="false">
         <p>The member has been declined.</p>
     </p:dialog>
-    <p:growl id="growl" showDetail="true" life="5000" />
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
@@ -168,6 +172,7 @@ li{
                 <h2 class="heading">APPLICATIONS</h2>
                 <ui:repeat value="#{memberBean.members}" var="member" rendered="#{not empty memberBean.members}">
                     <h:form>
+                        <p:growl id="growl" showDetail="true" life="5000" />
                         <li class="member #{member.membershipStatus eq 'Approved' ? 'approvemember' : 'member'}">
                             <h4><strong>Full name: </strong>#{member.fullName}</h4>
                             <p><strong>Gender: </strong>#{member.gender}</p>
@@ -179,8 +184,9 @@ li{
                             <p><strong>Next of kin Phone number: </strong>#{member.nextOfKinPhoneNumber}</p>
 
                             <h:commandButton class="button #{member.membershipStatus eq 'Approved' ? 'disabled-button' : ''}"
-                                value="#{member.membershipStatus eq 'Approved' ? 'Member' : 'Approve'}"
+                                value="#{member.membershipStatus eq 'Approved' ? 'Approved' : 'Approve'}"
                                 action="#{memberBean.approveMember(member)}"
+                                id="approveMember"
                                 disabled="#{member.membershipStatus eq 'Approved'}" 
                                 update="successDialog" oncomplete="PF('successDialog').show()" />
                                 
@@ -188,8 +194,8 @@ li{
                             <h:commandButton class="button #{member.membershipStatus eq 'Approved' ? 'approved-button' : ''}" value="Decline"
                             action="#{memberBean.declineMember(member)}" 
                             disabled="#{member.membershipStatus eq 'Approved'}"
+                            id="declineMember"
                             style="background-color: red;"
-                            update="warnDialog" oncomplete="PF('warnDialog').show()"
                             />
 
                         </li>

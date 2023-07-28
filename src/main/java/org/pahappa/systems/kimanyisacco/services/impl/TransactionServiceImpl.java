@@ -17,12 +17,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void makeTransaction(String transactionType, double amount, String userEmail) {
+    public void makeTransaction(String transactionType, double amount, String userEmail, double accountBalance) {
         // Create a new Transaction instance
         Transactions transaction = new Transactions();
         transaction.setTransactionType(transactionType);
         transaction.setAmount(amount);
         transaction.setSaccoMember(userEmail);
+        transaction.setAccountBalance(accountBalance);
 
         // Save the transaction to the repository
         transactionDAO.save(transaction);

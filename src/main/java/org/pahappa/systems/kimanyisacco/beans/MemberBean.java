@@ -97,7 +97,8 @@ public class MemberBean {
          // Send an email notification to the approved member
          sendApprovalEmail(member.getEmail(),member.getFullName());
 
-         PrimeFaces.current().executeScript("primefaces.info('Member Approval', 'Member approval successful.')");
+          FacesContext.getCurrentInstance().addMessage("approveMember",
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Member Approved", "The member has been approved successfully."));
     }
 
     public List<Member> getApprovedMembers() {
@@ -153,16 +154,20 @@ public class MemberBean {
         // Then, delete the member from the database
         memberService.delete(member);
 
-        // Show a growl message indicating that the member has been declined
-        FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_INFO, "Member Declined", "The member has been declined."));
+            
 
-            PrimeFaces.current().executeScript("primefaces.warn('Member Declined', 'The member has been declined.')");
-
+        
         // Refresh the page to reflect the updated list of members
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         try {
+
+            // Show a growl message indicating that the member has been declined
+        FacesContext.getCurrentInstance().addMessage("declineMember",
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Member Declined", "The member has been declined."));
+
             externalContext.redirect(externalContext.getRequestContextPath() + "/pages/Applicants.xhtml");
+
+        
         } catch (IOException e) {
             // Handle the exception if redirecting fails
             e.printStackTrace();

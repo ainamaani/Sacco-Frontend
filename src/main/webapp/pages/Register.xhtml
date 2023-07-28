@@ -215,7 +215,6 @@ form p a{
                             <h:inputText id="contact" placeholder="Enter your phone number" class="input" value="#{memberBean.member.phoneNumber}" />
                             <h:outputLabel for="password" value="Preffered password" class="label" />
                             <h:inputSecret id="password" placeholder="Enter your password" class="input" value="#{memberBean.member.password}" />
-                            <h:outputLabel for="membershipStatus" value="Membership Status" class="label" />
                             <h:selectOneMenu id="membershipStatus" value="#{memberBean.member.membershipStatus}" class="select hide" hidden="true">
                                 <f:selectItem itemLabel="notapproved" itemValue="notapproved" class="option hide" />
                             </h:selectOneMenu>

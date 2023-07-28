@@ -5,7 +5,7 @@ import java.util.List;
 import org.pahappa.systems.kimanyisacco.models.Transactions;
 
 public interface TransactionService {
-    void makeTransaction(String transactionType, double amount, String userEmail);
+    void makeTransaction(String transactionType, double amount, String userEmail, double accountBalance);
 
     List<Transactions> getTransactionsByUserEmail(String userEmail);
 

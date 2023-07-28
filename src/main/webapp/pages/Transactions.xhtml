@@ -315,7 +315,6 @@ tfoot td{
 <h:body>
    
     <f:view>
-         <h:panelGroup rendered="#{not empty sessionScope.loggedInUserEmail}">
         <div class="sidebar">
             <div class="logo"></div>
             <ul class="menu">
@@ -371,15 +370,7 @@ tfoot td{
 
 
         </div>
-        </h:panelGroup>
-        <h:panelGroup rendered="#{empty sessionScope.loggedInUser}">
-        <p>Access Denied!!! Redirecting.......</p>
-        <script>
-            setTimeout(function(){
-                window.location.href = "/sacco"
-            },2000);
-        </script>
-    </h:panelGroup>
+        
     </f:view>
 </h:body>
 </html>
