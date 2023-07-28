@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <style>
+            *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+
+}
+
+body{
+    background: #f2f2f2;
+}
+.navbar{
+    background: #fff;
+    display: flex;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;   
+    padding: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .navbar h4{
+    font-size: 1.3em;
+    border-bottom: 4px solid var(--blue);
+    font-style: italic;
+  }
+  .links ul{
+    display: flex;
+    gap: 15px;
+    list-style-type: none;
+  }
+  .logo img{
+    height: 100px;
+    width: 160px;
+  }
+  .links ul li a{
+    color: #000;
+    text-decoration: none;
+    border-bottom: 3px solid #008CBA;
+    border-radius: 4px;
+    padding: 5px;
+  }
+  .links ul li a:hover{
+    background: #008CBA;
+    color: #fff;
+  }
+.form-box{
+    width: 550px;
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    background: #fff;
+    padding: 50px 60px 70px;
+    text-align: center;
+    transform: translate(-50%,-20%);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+
+
+}
+.form-box h1{
+    font-size: 30px;
+    margin-bottom: 60px;
+    position: relative;
+    color: #008CBA;
+}
+
+.form-box h1::after{
+    content: '';
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: #008CBA;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.input-field{
+    background: #eaeaea;
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+.input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 15px 15px;
+   
+}
+.input-field i{
+    margin-left: 15px;
+    color: #999;
+}
+form p{
+    text-align: left;
+    font-size: 13px;
+}
+form p a{
+    text-decoration: none;
+    color: #3c0000;
+}
+.btn-field{
+    width: 100%;
+    padding: 15px;
+}
+.btn-field .button{
+    background: #008CBA;
+    color: #fff;
+    border-radius: 4px;
+    padding: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: 1s;
+    
+}
+.label{
+    text-align: left;
+}
+
+        </style>
+    </f:facet>
+</h:head>
+<h:body>
+    <f:view>
+        <div class="navbar">
+            <div class="logo">
+                <p:graphicImage library="images" name="Screenshot (486).png" width="160px" height="100px" alt="logo" />  
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a href="Login.xhtml">Login</a></li>
+                    <li><a href="Register.xhtml">Apply</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="form-box">
+                <h1>Login</h1>
+                <h:messages globalOnly="true" style="color: red;" />
+
+                <h:form>
+
+                <h:panelGroup id="messagePanel">
+                    <h:messages globalOnly="true" style="color: red;" />
+                </h:panelGroup>
+                    <p:growl id="growl" showDetail="true" sticky="false" />
+                            <div class="input-group">
+                                <h:outputLabel for="email" value="Email" class="label" />
+                                <div class="input-field">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <h:inputText class="input" id="email" value="#{loginBeann.email}" placeholder="Enter your Email" />
+                                </div>
+                                <h:outputLabel for="password" value="Password" class="label" />
+                                <div class="input-field">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <h:inputSecret class="input" id="password" value="#{loginBeann.password}"  placeholder="Enter your Password" />
+                                </div>
+                                <!-- <div>
+                                    <h:message for="loginButton" style="color: red;" />
+            
+                                </div> -->
+                            </div>
+                            <div class="btn-field">
+                                <h:commandButton id="loginButton" class="button" action="#{loginBeann.login}" value="Login" update="growl @form" />
+                            </div>
+                </h:form>
+
+                
+            </div>
+        </div>        
+    </f:view>
+</h:body>
+</html>

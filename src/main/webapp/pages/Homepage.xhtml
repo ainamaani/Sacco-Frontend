@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <style>
+            :root{
+    --primary: #1aac83;
+    --borrowed: #2a0fdc78;
+    --taken: #e21f1f;
+    --returned: #148226;
+    --error: #e7195a;
+    --blue: #008CBA;
+  }
+
+  body{
+    font-family: 'Poppins',sans-serif;
+    margin: 0;
+    background: #f1f1f1;
+  }
+  .navbar{
+    background: #fff;
+    display: flex;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;   
+    padding: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .navbar h4{
+    font-size: 1.3em;
+    border-bottom: 4px solid var(--blue);
+    font-style: italic;
+  }
+  .links ul{
+    display: flex;
+    gap: 9px;
+    list-style-type: none;
+  }
+  .logo img{
+    height: 100px;
+    width: 160px;
+  }
+  .links ul li a{
+    color: #000;
+    text-decoration: none;
+    border-bottom: 3px solid #008CBA;
+    border-radius: 4px;
+    padding: 5px;
+  }
+  .links ul li a:hover{
+    background: #008CBA;
+    color: #fff;
+  }
+  .content{
+    background: #fff;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin-top: 20px;
+    height: 350px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .content h1{
+    font-style: italic;
+  }
+  .content h1 span{
+    color: #008CBA;
+    font-size: 1.4em;
+  }
+  .sacco-image img{
+    position: relative;
+    top: 10%;
+    left: 10%;
+    border-radius: 5px;
+    height: 300px;
+    width: 300px;
+  }
+  .home-content a{
+    position: relative;
+    top: 40px;
+    color: #fff;
+    text-decoration: none;
+    background: #008CBA;
+    padding: 8px;
+    border-radius: 6px;
+  }
+  .home-content a:hover{
+    background: #8bb9c8;
+  }
+
+  /* CARDS */
+  .card-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+.card{
+  padding: 10px;
+    margin-top: 20px;
+    background-color: #fff;
+    width: 270px;
+    height: 350px;
+    margin-left: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.card:hover{
+    transform: translateY(-5%);
+    transition: 0.5s;
+}
+.card a{
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+    background: #595959;
+    width: 90px;
+    border-radius: 5px;
+    color: #d9d9d9;
+}
+.card img{
+    position: relative;
+    width: 250px;
+    border-radius: 40%;
+    
+}
+.services{
+    text-align: center;
+}
+.services h3{
+  color: #008CBA;
+}
+.copyright{
+    text-align: center;
+    font-weight: 600;
+    font-style: italic;
+}
+.slogan{
+  font-size: 40px;
+  position: relative;
+  top: 15%;
+  color: #008CBA;
+  font-weight: 700;
+}
+/* ABOUT US */
+.aboutus{
+  background: #fff;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.about h3{
+  text-align: center;
+  color: #008CBA;
+}
+
+
+
+        </style>
+    </f:facet>
+</h:head>
+<h:body>
+    <f:view>
+        <div class="navbar">
+            <div class="logo">
+                <h4>KimwanyiSACCO</h4>
+            </div>
+            <div class="links">
+                <ul>
+                  <li><a href="pages/Login.xhtml">Login</a></li>
+                  <li><a href="pages/Register.xhtml">Apply</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="content">
+            <div class="home-content">
+                <h3 class="slogan">
+                    Transforming Savings, Empowering Communities
+                </h3>
+                <a href="pages/Register.xhtml">Apply for membership</a>
+            </div>
+            <div class="sacco-image">
+                <h:graphicImage value="https://media.istockphoto.com/id/909395184/photo/money-euro-coins-euro-money-euro-currency-coins-stacked-on-each-other-in-different-positions.webp?b=1&amp;s=170667a&amp;w=0&amp;k=20&amp;c=_Uska0Ekbr1j9edhJ0EqJ8ca4mDiViEbuUBwSFbSUBw=" alt="Kimwanyi SACCO Image" width="300" />
+            </div>
+        </div>
+    
+        <div class="services">
+            <h3>Services</h3>
+            <div class="card-content">
+                <div class="card">
+                    <h:graphicImage value="https://media.istockphoto.com/id/1165842880/photo/financial-saving-concept-plant-growing-out-of-coins.webp?b=1&amp;s=170667a&amp;w=0&amp;k=20&amp;c=XF9ksitHzK7ImIX9uELLEvEqSLyKN3Nn658SuF6dMN0=" alt="" />
+                    <h3>Savings</h3>
+                    <p>Start saving for a brighter future with Kimwanyi SACCO's high-interest savings accounts.</p>
+                </div>
+                <div class="card">
+                  <h:graphicImage value="https://media.istockphoto.com/id/1356380314/photo/customer-shaking-hands-with-car-salesman-buying-a-car.webp?b=1&amp;s=170667a&amp;w=0&amp;k=20&amp;c=ss-CdY4ksumMexjmge-piyGRho66a3o5h8Z-WD9gPJI=" alt=""/>
+                  <h3>Member Loans</h3>
+                  <p>Access affordable member loans with Kimwanyi SACCO. Simple application process and competitive rates.</p>
+              </div>
+              <div class="card">
+                  <h:graphicImage value="https://media.istockphoto.com/id/1320806352/photo/close-up-businessman-using-calculator-and-reading-paper-document-about-business-data.webp?b=1&amp;s=170667a&amp;w=0&amp;k=20&amp;c=zMa-KavL_roUyPITxALVIUumJ-xNnGAvebqGafZuTNo=" alt=""/>
+                  <h3>Financial Education</h3>
+                  <p>Empower yourself with Kimwanyi SACCO's financial education resources for informed financial decision-making.
+                  </p>
+              </div>
+              <div class="card">
+                  <h:graphicImage value="https://media.istockphoto.com/id/1193547020/photo/retirement-plan-with-calculator-pen-and-glasses.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=ftWWtwufeKlWLPYyNphAuf94Z4lLaUKgPi-xbVWUDFQ=" alt=""/>
+                  <h3>Retirement Planning</h3>
+                  <p>Secure your retirement with Kimwanyi SACCO's comprehensive and personalized retirement planning services.</p>
+              </div>
+            </div>
+        </div>
+        <div class="about">
+          <h3>About Us</h3>
+          <div class="aboutus">
+              <p>Welcome to Kimwanyi SACCO! We are a trusted Saving and Credit Cooperative 
+                  Organization dedicated to empowering our members and promoting financial 
+                  well-being. <br/> With a strong commitment to member satisfaction, we provide 
+                  a wide range of financial services, including savings accounts, loans, 
+                  and investment opportunities. Our team of experienced professionals is 
+                  here to support you on your financial journey, offering personalized 
+                  solutions and expert guidance. <br/> At Kimwanyi SACCO, we prioritize transparency, 
+                  security, and community development. Join us today and experience the difference 
+                  of being part of a cooperative that puts your needs first.</p>
+          </div>
+          
+      </div>
+      <div class="about">
+        <h3>Member eligibility</h3>
+        <div class="aboutus">
+            <p>At Kimwanyi SACCO, becoming a member is open to individuals aged 18 and above 
+                residing in the local community. To be eligible, prospective members must provide 
+                valid identification and agree to comply with SACCO policies. <br/> Shareholding is 
+                required, and the membership application process involves completing an application 
+                form. Compliance with regulatory requirements, such as AML and KYC guidelines, is 
+                essential. Join our SACCO to access a wide range of financial services, benefit 
+                from personalized solutions, and contribute to the economic growth of our community.</p>
+        </div>
+    </div>
+    <div class="about">
+      <h3>Contact Us</h3>
+      <div class="aboutus">
+          <p>
+              We value your feedback and are here to assist you. 
+              Please feel free to reach out to us using the following 
+              contact information:</p>
+
+              <p><strong>Phone:</strong>+256 7543152570/+256 770941412</p>
+              <p><strong>Email:</strong>info@kimwanyisacco.com</p>
+              <p><strong>Address:</strong>Ntinda, along Muteesa II road</p>
+               
+              <p>
+              Whether you have questions, need assistance, or want to learn more about our 
+              financial services, our dedicated support team is ready to help. You can also 
+              visit our branch during business hours for in-person assistance. We look forward 
+              to hearing from you and serving your financial needs at Kimwanyi SACCO. Thank you.</p>
+
+      </div>
+  </div>
+        <div class="footer">
+            <footer>
+                <p>© 2023 KimwanyiSACCO. All rights reserved.</p>
+            </footer>
+        </div>
+    </f:view>
+</h:body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <style>
+            
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    display: flex;
+}
+.sidebar{
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 90px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    color: #fff;
+    overflow: hidden;
+    transition: all 0.5s linear;
+    background: rgba(113, 99, 186, 255);
+}
+.sidebar:hover{
+    width: 240px;
+    transition: 0.5s;
+}
+.logo{
+    height: 80px;
+    padding: 16px;
+}
+.menu li{
+    padding: 0.5rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+.menu li:hover, .active{
+    background: #e0e0e058;
+}
+.menu a{
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+.menu a span{
+    overflow: hidden;
+}
+ul{
+    list-style: none;
+}
+.menu a i{
+    font-size: 1.2rem;
+}
+.logout{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* BODY */
+.main--content{
+    position: relative;
+    background: #ebe9e9;
+    width: 100%;
+    padding: 0.8rem;
+}
+.header--wrapper img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.header--wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 1.7rem;
+    margin-bottom: 0.8rem;
+}
+.header--title{
+    color: rgba(113, 99, 186, 255);
+}
+.user--info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.search--box{
+    background: rgb(237, 237, 237);
+    border-radius: 15px;
+    color: rgba(113, 99, 186, 255);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+}
+.search--box input{
+    background: transparent;
+    padding: 10px;
+}
+.search--box i{
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.search--box i:hover{
+    transform: scale(1.2);
+}
+
+/* CARD CONTAINER */
+
+.card--container{
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+}
+.card--wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.main--title{
+    color: rgba(113, 99, 186, 255);
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+.payment--card{
+    background: rgb(229, 223, 233);
+    border-radius: 10px;
+    padding: 1.2rem;
+    width: 290px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease-in-out;
+}
+.payment--card:hover{
+    transform: translateY(-5px);
+}
+.card--header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.amount{
+    display: flex;
+    flex-direction: column;
+}
+.titlee{
+    font-size: 12px;
+    font-weight: 200;
+}
+.amount--value{
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+.icon{
+    color: #fff;
+    padding: 0.8rem;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    background: red;
+}
+.card-detail{
+    font-size: 18px;
+    color: #777777;
+    letter-spacing: 2px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* COLORS CSS */
+.light-red{
+    background: rgba(255, 102, 102, 0.4);
+}
+.light-purple{
+    background: rgba(204, 153, 255, 0.5);
+}
+.light-green{
+    background: rgba(144, 238, 144, 1);
+
+}
+.light-blue{
+    background: rgb(254, 226, 254);
+}
+.dark-red{
+    background: red;
+}
+.dark-purple{
+    background: purple;
+}
+.dark-green{
+    background: green;
+}
+.dark-blue{
+    background: blue;
+}
+
+/* TABLE SECTION */
+.tabular--wrapper{
+    background: #fff;
+    margin-top: 1.6 rem;
+    border-radius: 10px;
+    padding: 2rem;
+}
+.table-container{
+    width: 100%;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+thead{
+    background: rgba(113, 99, 186, 255);
+    color: #fff;
+}
+th{
+    padding: 15px;
+    text-align: left;
+}
+tbody{
+    background: #f2f2f2;
+}
+td{
+    padding: 15px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 550;
+}
+tr:nth-child(even){
+    background: #fff;
+}
+tfoot{
+    background: rgba(113, 99, 186, 255);
+    font-weight: bold;
+    color: #fff;
+}
+tfoot td{
+    padding: 15px;
+    color: #fff;
+}
+.table-container button{
+    color: green;
+    background: none;
+    cursor: pointer;
+}
+   
+        </style>
+    </f:facet>
+</h:head>
+<h:body>
+    <f:view>
+        <div class="sidebar">
+            <div class="logo"></div>
+            <ul class="menu">
+                <li class="active">
+                    <a href="pages/Dashboard.xhtml">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h:outputText value="Dashboard" />
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="Transactions.xhtml">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h:outputText value="Make Transaction" />
+                    </a>
+                </li>
+                <li class="logout">
+                    <h:form>
+                        <p:commandButton class="button" value="Log out" action="#{loginBeann.logout}"  />
+                    </h:form>
+                </li>
+            </ul>
+        </div>
+        <div class="main--content">
+            <div class="header--wrapper">
+                <div class="header--title">
+                    <h:outputText value="Kimwanyi" />
+                    <h2>SACCO</h2>
+                </div>
+                
+            </div>
+            <!-- CONTENT STARTS HERE -->
+            <div class="card--container">
+                <h3 class="main--title">Your account data</h3>
+                <div class="card--wrapper">
+                    
+                    <div class="payment--card light-red">
+                        <div class="card--header">
+                            <div class="amount">
+                                <h:outputText class="titlee" value="Loans" />
+                                <h:outputText class="amount--value" value="Ush 0.00" />
+                            </div>
+                            <i class="fas fa-money-bill-wave icon dark-red"></i>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="payment--card light-green">
+                        <div class="card--header">
+                            <div class="amount">
+                                <h:outputText class="titlee" value="Account balance" />
+
+                                <h:outputText class="amount--value" value="Current Balance:Ush #{transactionBean.accountBalance}" />
+                            </div>
+                            <i class="fas fa-list icon dark-green"></i>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="tabular--wrapper">
+                <h3 class="main--title">Transaction statements</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Amount</th>
+                               
+                            </tr>
+                        </thead>
+                            <tbody>
+                                <ui:repeat value="#{transactionBean.userTransactions}" var="transaction">
+                                    <tr>
+                                        <td>#{transaction.createdOn}</td>
+                                        <td>#{transaction.transactionType}</td>
+                                        <td>Ush. #{transaction.amount}</td>
+                                        
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </f:view>
+</h:body>
+</html>
