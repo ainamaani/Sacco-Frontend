@@ -18,6 +18,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void makeTransaction(String transactionType, double amount, String userEmail, double accountBalance) {
+
         // Create a new Transaction instance
         Transactions transaction = new Transactions();
         transaction.setTransactionType(transactionType);

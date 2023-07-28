@@ -25,6 +25,8 @@ public class TransactionBean {
     private TransactionDAO transactionDAO;
     private TransactionService transactionService;
     private double accountBalance;
+    private String transferEmail;
+    private double transferAmount;
 
     public TransactionBean() {
         transaction = new Transactions();
@@ -52,6 +54,23 @@ public class TransactionBean {
     public void setTransaction(Transactions transaction) {
         this.transaction = transaction;
     }
+
+    public String getTransferEmail() {
+        return transferEmail;
+    }
+    
+    public void setTransferEmail(String transferEmail) {
+        this.transferEmail = transferEmail;
+    }
+
+    public double getTransferAmount() {
+        return transferAmount;
+    }
+    
+    public void setTransferAmount(double transferAmount) {
+        this.transferAmount = transferAmount;
+    }
+    
 
     public void makeTransaction() {
         String userEmail = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("loggedInUserEmail");
@@ -122,5 +141,71 @@ public class TransactionBean {
 
         userTransactions = transactionService.getTransactionsByUserEmail(userEmail);
         return userTransactions;
+    }
+
+
+    public void makeInternalTransfer() {
+        String userEmail = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("loggedInUserEmail");
+    
+        if (userEmail == null || userEmail.isEmpty()) {
+            // Show an error message if the user is not logged in
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Please log in to make a transaction", null));
+            return;
+        }
+    
+        // Check if the recipient email exists and is not the same as the sender
+        if (transferEmail == null || transferEmail.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Recipient email cannot be empty", null));
+            return;
+        } else if (transferEmail.equals(userEmail)) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot transfer to your own account", null));
+            return;
+        }
+
+        
+    
+        // Fetch the sender's current balance
+        double senderBalance = transactionService.getAccountBalance(userEmail);
+    
+        // Fetch the recipient's current balance
+        double recipientBalance = transactionService.getAccountBalance(transferEmail);
+    
+        double transferAmount = this.transferAmount;
+
+    if (transferAmount <= 0) {
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Transfer amount must be greater than zero", null));
+        return;
+    }
+
+    // Check if the sender has sufficient balance for the transfer
+    if (transferAmount > senderBalance) {
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Insufficient balance for transfer", null));
+        return;
+    }
+    
+        // Update the sender's balance
+        senderBalance -= transferAmount;
+
+        transaction.setAccountBalance(senderBalance);
+    
+        // Update the recipient's balance
+        recipientBalance += transferAmount;
+    
+        // Save the updated balances along with the transactions
+        transactionService.makeTransaction("internal_transfer_sender", transferAmount, userEmail, senderBalance);
+        transactionService.makeTransaction("internal_transfer_recipient", transferAmount, transferEmail, recipientBalance);
+    
+        // Show a success message
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Internal transfer successful", null));
+    
+        // Clear the transfer email and amount after successful transfer
+        transaction.setAmount(0.0);
+        transferEmail = null;
     }
 }
