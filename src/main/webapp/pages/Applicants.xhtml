@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <style>
+
+body{
+    font-family: 'Poppins',sans-serif;
+    margin: 0;
+    background: #f1f1f1;
+  }
+            .main--content{
+    position: relative;
+    background: #ebe9e9;
+    width: 100%;
+    padding: 0.8rem;
+}
+.header--wrapper img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.header--wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 1.7rem;
+    margin-bottom: 0.8rem;
+}
+.header--title{
+    color: #008CBA;
+}
+.user--info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.search--box{
+    background: rgb(237, 237, 237);
+    border-radius: 15px;
+    color: rgba(113, 99, 186, 255);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+}
+.search--box input{
+    background: transparent;
+    padding: 10px;
+}
+.search--box i{
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.search--box i:hover{
+    transform: scale(1.2);
+}
+li{
+    list-style: none;
+}
+.member{
+    background: #fff;
+    margin: 6px;
+    padding: 6px;
+    padding-left: 12px;
+    line-height: 2px;
+    border-radius: 6px;
+    position: relative;
+    right: 45px;
+    border-left: 4px solid #00ba79;
+
+}
+.button{
+    background: #008CBA;
+    padding: 7px;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+.button:hover{
+    background: #acdbeb;
+    color: #a69898;
+}
+.disabled-button {
+  background: rgb(15, 158, 77); 
+  padding: 7px;
+    color: #fff;
+    border: none;
+    outline: none;
+  
+}
+.heading{
+    position: relative;
+    left: 30%;
+    color: #008CBA;
+    
+}
+.approved-button{
+    display: none;
+}
+.linkToMembers a{
+    text-decoration: none;
+    color: white;
+    background: #00ba79;
+    padding: 7px;
+    position: relative;
+    left: 380px;
+}
+.aprovemember{
+    background: #fff;
+    margin: 6px;
+    padding: 6px;
+    line-height: 2px;
+    border-radius: 6px;
+    position: relative;
+    right: 45px;
+    border-left: 2px solid #00ba79;
+}
+
+        </style>
+
+    </f:facet>
+</h:head>
+<h:body>
+    <p:dialog id="successDialog" widgetVar="successDialog" header="Success" modal="true" resizable="false">
+        <p>Member approval successful.</p>
+    </p:dialog>
+
+    <!-- Define a dialog for warning message -->
+    <p:dialog id="warnDialog" widgetVar="warnDialog" header="Warning" modal="true" resizable="false">
+        <p>The member has been declined.</p>
+    </p:dialog>
+    <p:growl id="growl" showDetail="true" life="5000" />
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <h:outputText value="Kimwanyi" />
+                <h2>SACCO</h2>
+            </div>
+            <div class="linkToMembers">
+                <a href="Members.xhtml">View approved members</a>
+            </div>
+            <div class="adminlogout">
+                <h:form>
+                        <h:commandButton class="button" value="Log out" action="#{loginBeann.logout}"  />
+                </h:form>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <h2 class="heading">APPLICATIONS</h2>
+                <ui:repeat value="#{memberBean.members}" var="member" rendered="#{not empty memberBean.members}">
+                    <h:form>
+                        <li class="member #{member.membershipStatus eq 'Approved' ? 'approvemember' : 'member'}">
+                            <h4><strong>Full name: </strong>#{member.fullName}</h4>
+                            <p><strong>Gender: </strong>#{member.gender}</p>
+                            <p><strong>Occupation: </strong>#{member.currentOccupation}</p>
+                            <p><strong>Email: </strong>#{member.email}</p>
+                            <p><strong>Phone number: </strong>#{member.phoneNumber}</p>
+                            <p><strong>Residential Address: </strong>#{member.residentialAddress}</p>
+                            <p><strong>Employer's email: </strong>#{member.employerEmail}</p>
+                            <p><strong>Next of kin Phone number: </strong>#{member.nextOfKinPhoneNumber}</p>
+
+                            <h:commandButton class="button #{member.membershipStatus eq 'Approved' ? 'disabled-button' : ''}"
+                                value="#{member.membershipStatus eq 'Approved' ? 'Member' : 'Approve'}"
+                                action="#{memberBean.approveMember(member)}"
+                                disabled="#{member.membershipStatus eq 'Approved'}" 
+                                update="successDialog" oncomplete="PF('successDialog').show()" />
+                                
+
+                            <h:commandButton class="button #{member.membershipStatus eq 'Approved' ? 'approved-button' : ''}" value="Decline"
+                            action="#{memberBean.declineMember(member)}" 
+                            disabled="#{member.membershipStatus eq 'Approved'}"
+                            style="background-color: red;"
+                            update="warnDialog" oncomplete="PF('warnDialog').show()"
+                            />
+
+                        </li>
+                    </h:form>
+    
+                </ui:repeat>
+            </ul>
+        </div>
+
+    </div>
+    
+</h:body>
+</html>

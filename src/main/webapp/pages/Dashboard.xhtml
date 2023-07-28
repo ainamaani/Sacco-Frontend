@@ -3,6 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
 
 <h:head>
@@ -274,7 +275,8 @@ tfoot td{
     color: green;
     background: none;
     cursor: pointer;
-}   
+}
+   
         </style>
     </f:facet>
 </h:head>
@@ -291,34 +293,15 @@ tfoot td{
                 </li>
                 
                 <li>
-                    <h:link>
-                        <i class="fas fa-user"></i>
-                        <h:outputText value="Profile" />
-                    </h:link>
-                </li>
-                <li>
-                    <a href="Transaction.xhtml">
+                    <a href="Transactions.xhtml">
                         <i class="fas fa-exchange-alt"></i>
                         <h:outputText value="Make Transaction" />
                     </a>
                 </li>
-                <li>
-                    <h:link>
-                        <i class="fas fa-star"></i>
-                        <h:outputText value="Testimonials" />
-                    </h:link>
-                </li>
-                <li>
-                    <h:link>
-                        <i class="fas fa-cog"></i>
-                        <h:outputText value="Settings" />
-                    </h:link>
-                </li>
                 <li class="logout">
-                    <a href="pages/Login.xhtml">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <h:outputText value="Log out" />
-                    </a>
+                    <h:form>
+                        <p:commandButton class="button" value="Log out" action="#{loginBeann.logout}"  />
+                    </h:form>
                 </li>
             </ul>
         </div>
@@ -328,50 +311,35 @@ tfoot td{
                     <h:outputText value="Kimwanyi" />
                     <h2>SACCO</h2>
                 </div>
-                <div class="user--info">
-                    <div class="search--box">
-                        <i class="fa-solid fa-search"></i>
-                        <h:inputText placeholder="Search" />
-                    </div>
-                    <h:graphicImage url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJs2eTPW2hNKXRzhLOKaFPhG3K6lW4JxTAKQ&amp;usqp=CAU" alt="" />
-                </div>
+                
             </div>
             <!-- CONTENT STARTS HERE -->
             <div class="card--container">
                 <h3 class="main--title">Your account data</h3>
                 <div class="card--wrapper">
-                    <div class="payment--card light-purple">
-                        <div class="card--header">
-                            <div class="amount">
-                                <h:outputText class="titlee" value="Debits" />
-                                <h:outputText class="amount--value" value="Ush 2,300,550.00" />
-                            </div>
-                            <i class="fas fa-money-check-alt icon dark-purple"></i>
-                            
-                        </div>
-                        <h:outputText class="card-detail" value="**** **** 3484" />
-                    </div>
+                    
                     <div class="payment--card light-red">
                         <div class="card--header">
                             <div class="amount">
                                 <h:outputText class="titlee" value="Loans" />
-                                <h:outputText class="amount--value" value="Ush 2,300,550.00" />
+                                <h:outputText class="amount--value" value="Ush 0.00" />
                             </div>
                             <i class="fas fa-money-bill-wave icon dark-red"></i>
                             
                         </div>
-                        <h:outputText class="card-detail" value="**** **** 3484" />
+                        
                     </div>
                     <div class="payment--card light-green">
                         <div class="card--header">
                             <div class="amount">
-                                <h:outputText class="titlee" value="Credits" />
-                                <h:outputText class="amount--value" value="Ush 2,300,550.00" />
+                                <h:outputText class="titlee" value="Account balance" />
+
+                                <h:outputText class="amount--value" value="Current Balance:Ush #{transactionBean.accountBalance}" />
                             </div>
                             <i class="fas fa-list icon dark-green"></i>
                             
                         </div>
-                        <h:outputText class="card-detail" value="**** **** 3484" />
+                        
                     </div>
                 </div>
             </div>
@@ -383,49 +351,21 @@ tfoot td{
                             <tr>
                                 <th>Date</th>
                                 <th>Transaction Type</th>
-                                <th>Description</th>
-                                <th>Debits</th>
-                                <th>Credits</th>
-                                <th>Balance</th>
+                                <th>Amount</th>
+                               
                             </tr>
                         </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                       2023-05-01 
-                                    </td>
-                                    <td>Withdraw</td>
-                                    <td>Fees payment</td>
-                                    <td>Ush 56000.00</td>
-                                    <td>--------------</td>
-                                    <td>3004550.00</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       2023-05-01 
-                                    </td>
-                                    <td>Deposit</td>
-                                    <td>CENTENARY</td>
-                                    <td>--------------</td>
-                                    <td>Ush 78100.00</td>
-                                    <td>9064550.00</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       2023-05-01 
-                                    </td>
-                                    <td>Withdraw</td>
-                                    <td>Fees payment</td>
-                                    <td>Ush 7500000.00</td>
-                                    <td>--------------</td>
-                                    <td>1004500.00</td>
-                                </tr>
+                                <ui:repeat value="#{transactionBean.userTransactions}" var="transaction">
+                                    <tr>
+                                        <td>#{transaction.createdOn}</td>
+                                        <td>#{transaction.transactionType}</td>
+                                        <td>Ush. #{transaction.amount}</td>
+                                        
+                                    </tr>
+                                </ui:repeat>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="7">Total: Ush 3,599,500.00</td>
-                                </tr>
-                            </tfoot>
+                        
                     </table>
                 </div>
             </div>

@@ -79,6 +79,7 @@ menu a i{
     bottom: 0;
     left: 0;
     width: 100%;
+    
 }
 
 /* BODY */
@@ -312,46 +313,29 @@ tfoot td{
     </f:facet>
 </h:head>
 <h:body>
+   
     <f:view>
+         <h:panelGroup rendered="#{not empty sessionScope.loggedInUserEmail}">
         <div class="sidebar">
             <div class="logo"></div>
             <ul class="menu">
                 <li >
-                    <h:link>
+                    <a href="Dashboard.xhtml">
                         <i class="fas fa-tachometer-alt"></i>
                         <h:outputText value="Dashboard" />
-                    </h:link>
+                    </a>
                 </li>
                 
-                <li>
-                    <h:link>
-                        <i class="fas fa-user"></i>
-                        <h:outputText value="Profile" />
-                    </h:link>
-                </li>
                 <li class="active">
                     <h:link>
                         <i class="fas fa-exchange-alt"></i>
                         <h:outputText value="Make Transaction" />
                     </h:link>
                 </li>
-                <li>
-                    <h:link>
-                        <i class="fas fa-star"></i>
-                        <h:outputText value="Testimonials" />
-                    </h:link>
-                </li>
-                <li>
-                    <h:link>
-                        <i class="fas fa-cog"></i>
-                        <h:outputText value="Settings" />
-                    </h:link>
-                </li>
                 <li class="logout">
-                    <h:link>
-                        <i class="fas fa-sign-out-alt"></i>
-                        <h:outputText value="Log out" />
-                    </h:link>
+                    <h:form>
+                        <p:commandButton class="logoutbutton" value="Log out" action="#{loginBeann.logout}"  />
+                    </h:form>
                 </li>
             </ul>
         </div>
@@ -361,13 +345,6 @@ tfoot td{
                     <h:outputText value="Kimwanyi" />
                     <h2>SACCO</h2>
                 </div>
-                <div class="user--info">
-                    <div class="search--box">
-                        <i class="fa-solid fa-search"></i>
-                        <h:inputText placeholder="Search" />
-                    </div>
-                    <h:graphicImage url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJs2eTPW2hNKXRzhLOKaFPhG3K6lW4JxTAKQ&amp;usqp=CAU" alt="" />
-                </div>
             </div>
             <!-- CONTENT STARTS HERE -->
         <div class="transaction">
@@ -376,21 +353,33 @@ tfoot td{
                     <h2>Make a transaction</h2>
                     <h:form>
                         <h:outputLabel class="label" for="type" value="Transaction type" />
-                        <h:selectOneMenu class="select" id="type" value="#{bean.transactionType}">
-                            <f:selectItem class="option" itemLabel="Select type of transaction" itemValue="select" />
+                        <h:selectOneMenu class="select" id="type" value="#{transactionBean.transaction.transactionType}">
                             <f:selectItem class="option" itemLabel="Deposit" itemValue="deposit" />
                             <f:selectItem class="option" itemLabel="Make withdraw" itemValue="withdraw" />
                         </h:selectOneMenu>
                         <h:outputLabel class="label" for="amount" value="Enter amount" />
-                        <h:inputText class="input" id="amount" value="#{bean.amount}" />
-                        <h:commandButton class="transacbutton" value="Make transaction" action="#{bean.makeTransaction}" />
+                        <h:inputText class="input" id="amount" value="#{transactionBean.transaction.amount}" />
+                        <h:commandButton class="transacbutton" value="Make transaction" action="#{transactionBean.makeTransaction}" />
+
+                        <p:growl id="growl" showDetail="true" sticky="true" life="5000" />
                     </h:form>
                 </div>
             </div>
+            <h:outputText value="Current Balance: #{transactionBean.accountBalance}" />
+
         </div>
 
 
         </div>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{empty sessionScope.loggedInUser}">
+        <p>Access Denied!!! Redirecting.......</p>
+        <script>
+            setTimeout(function(){
+                window.location.href = "/sacco"
+            },2000);
+        </script>
+    </h:panelGroup>
     </f:view>
 </h:body>
 </html>
