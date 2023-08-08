@@ -31,8 +31,6 @@ public class TransactionDAOImpl implements TransactionDAO {
         this.sessionFactory = sessionFactory;
     }
 
-
-
     @Override
     public void save(Transactions transaction) {
         try (Session session = sessionFactory.openSession()) {
@@ -49,7 +47,6 @@ public class TransactionDAOImpl implements TransactionDAO {
         }
     }
     
-
     @Override
     public List<Transactions> getTransactionsByUserEmail(String userEmail) {
         Session session = sessionFactory.openSession();
@@ -65,7 +62,7 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Override
-public double getAccountBalanceByEmail(String userEmail) {
+    public double getAccountBalanceByEmail(String userEmail) {
     Session session = sessionFactory.openSession();
     try {
         CriteriaBuilder cb = session.getCriteriaBuilder();

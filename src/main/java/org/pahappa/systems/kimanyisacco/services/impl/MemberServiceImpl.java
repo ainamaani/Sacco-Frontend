@@ -4,14 +4,12 @@ import java.util.List;
 
 import org.pahappa.systems.kimanyisacco.daos.MemberDAO;
 import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.models.Transactions;
 import org.pahappa.systems.kimanyisacco.services.MemberService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl extends TryService implements MemberService {
     private MemberDAO memberDAO;
-    private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
     
     @Override
@@ -22,7 +20,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void register(Member member) {
         memberDAO.save(member);
-        logger.info("Member registered successfully: {}", member.getFullName());
+    }
+
+    @Override
+    void registerA(Member member) {
+        memberDAO.save(member);
     }
 
     @Override
@@ -47,10 +49,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<Transactions> getAllTransactions() {
+        return memberDAO.getAllTransactionsMade();
+    }
+
+    @Override
     public boolean isEmailExists(String email) {
     Member existingMember = memberDAO.getMemberByEmail(email);
     return existingMember != null;
 }
+
+    
 
 
 }

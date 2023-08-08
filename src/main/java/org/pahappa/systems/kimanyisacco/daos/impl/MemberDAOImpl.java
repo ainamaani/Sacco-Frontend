@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.pahappa.systems.kimanyisacco.daos.MemberDAO;
 import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.models.Transactions;
 
 
 public class MemberDAOImpl implements MemberDAO {
@@ -156,5 +157,36 @@ public void delete(Member member) {
         }
         
         return members;
+    }
+
+
+    @Override
+    public List<Transactions> getAllTransactionsMade() {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        List<Transactions> transactions = null;
+
+        try {
+            transaction = session.beginTransaction();
+            
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Transactions> criteriaQuery = builder.createQuery(Transactions.class);
+            Root<Transactions> root = criteriaQuery.from(Transactions.class);
+            criteriaQuery.select(root);
+            
+            Query<Transactions> query = session.createQuery(criteriaQuery);
+            transactions = query.getResultList();
+            
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+        return transactions;
     }
 }

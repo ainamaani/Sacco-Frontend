@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.pahappa.systems.kimanyisacco.daos.MemberDAO;
 import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.models.Transactions;
 
 public interface MemberService {
     void register(Member member);
@@ -19,4 +20,6 @@ public interface MemberService {
     boolean isEmailExists(String email);
 
     List<Member> getApprovedMembers();
+
+    List<Transactions> getAllTransactions();
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.models.Transactions;
 
 public interface MemberDAO {
     void save(Member member);
@@ -19,5 +20,7 @@ public interface MemberDAO {
     Member getMemberByEmail(String email);
 
     List<Member> getMembersByStatus(String status);
+
+    List<Transactions> getAllTransactionsMade();
 
 }

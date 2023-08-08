@@ -359,13 +359,11 @@ tfoot td{
                         <h:outputLabel class="label" for="amount" value="Enter amount" />
                         <h:inputText class="input" id="amount" value="#{transactionBean.transaction.amount}" />
                         <h:commandButton class="transacbutton" value="Make transaction" action="#{transactionBean.makeTransaction}" />
-
                         <p:growl id="growl" showDetail="true" sticky="true" life="5000" />
                     </h:form>
     
                 </div>
             </div>
-            <h:outputText value="Current Balance: #{transactionBean.accountBalance}" />
 
         </div>
 

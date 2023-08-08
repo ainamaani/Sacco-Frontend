@@ -4,10 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.pahappa.systems.kimanyisacco.enums.Gender;
 
 @Entity
 @Table(name = "applicants")
@@ -15,7 +19,7 @@ import javax.persistence.Table;
 public class Member {
     private int id;
     private String fullName;
-    private String gender;
+    private Gender gender;
     private Date dateOfBirth;
     private String nationality;
     private String residentialAddress;
@@ -36,7 +40,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
+    int getId() {
         return id;
     }
 
@@ -53,12 +57,13 @@ public class Member {
         this.fullName = fullName;
     }
 
-    @Column(name = "gender", nullable = false, length = 255)
-    public String getGender() {
+    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -71,7 +76,6 @@ public class Member {
         this.dateOfBirth = dateOfBirth;
     }
 
-    @Column(name = "nationality", nullable = false, length = 255)
     public String getNationality() {
         return nationality;
     }
@@ -178,7 +182,6 @@ public class Member {
     public void setNextOfKinPhoneNumber(String nextOfKinPhoneNumber) {
         this.nextOfKinPhoneNumber = nextOfKinPhoneNumber;
     }
-
 
     @Column(name = "password", nullable = false, length = 255)
     public String getPassword() {

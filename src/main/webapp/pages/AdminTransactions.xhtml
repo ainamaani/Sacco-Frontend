@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+
+        <style>
+
+body{
+    font-family: 'Poppins',sans-serif;
+    margin: 0;
+    background: #f1f1f1;
+  }
+  
+            .main--content{
+    position: relative;
+    background: #ebe9e9;
+    width: 100%;
+    padding: 0.8rem;
+}
+.header--wrapper img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.header--wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 1.7rem;
+    margin-bottom: 0.8rem;
+}
+.header--title{
+    color: #008CBA;
+}
+.user--info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.search--box{
+    background: rgb(237, 237, 237);
+    border-radius: 15px;
+    color: rgba(113, 99, 186, 255);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+}
+.search--box input{
+    background: transparent;
+    padding: 10px;
+}
+.search--box i{
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.search--box i:hover{
+    transform: scale(1.2);
+}
+li{
+    list-style: none;
+}
+.member{
+    background: #fff;
+    margin: 6px;
+    padding: 6px;
+    line-height: 2px;
+    border-radius: 6px;
+    position: relative;
+    right: 45px;
+    border-left: 2px solid #008CBA;
+
+}
+.button{
+    background: #008CBA;
+    padding: 7px;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+.button:hover{
+    background: #acdbeb;
+    color: #a69898;
+}
+.disabled-button {
+  background: rgb(15, 158, 77); 
+  padding: 7px;
+    color: #fff;
+    border: none;
+    outline: none;
+  
+}
+.heading{
+    position: relative;
+    left: 30%;
+    color: #008CBA;
+    
+}
+
+        </style>
+
+    </f:facet>
+</h:head>
+<h:body>
+    <p:growl id="growl" showDetail="true" life="5000" />
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <h:outputText value="Kimwanyi" />
+                <h2>SACCO</h2>
+            </div>
+            <div class="adminlogout">
+                <h:form>
+                        <h:commandButton class="button" value="Log out" action="#{loginBeann.logout}"  />
+                </h:form>
+            </div>
+        </div>
+        <div>
+
+            <h2 class="heading">TRANSACTIONS MADE</h2>
+
+            <h:form>
+        <p:dataTable value="#{memberBean.transactionsMade}" var="transaction">
+            <p:column headerText="Transaction Date and Time">
+                #{transaction.createdOn}
+            </p:column>
+            <p:column headerText="Transaction Type">
+                #{transaction.transactionType}
+            </p:column>
+            <p:column headerText="Member">
+                #{transaction.saccoMember}
+            </p:column>
+            <p:column headerText="Amount">
+                #{transaction.amount}
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+        </div>
+    </div>
+
+</h:body>
+</html>
