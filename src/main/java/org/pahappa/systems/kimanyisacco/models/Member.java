@@ -1,7 +1,9 @@
 package org.pahappa.systems.kimanyisacco.models;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.pahappa.systems.kimanyisacco.enums.Gender;
@@ -19,11 +22,12 @@ import org.pahappa.systems.kimanyisacco.enums.Gender;
 public class Member {
     private int id;
     private String fullName;
-    private Gender gender;
+    private Gender gender; 
     private Date dateOfBirth;
     private String nationality;
     private String residentialAddress;
     private String email;
+    private List<Transactions> transactions;
     private String phoneNumber;
     private String employmentStatus;
     private String currentOccupation;
@@ -199,5 +203,14 @@ public class Member {
 
     public void setMembershipStatus(String membershipStatus) {
         this.membershipStatus = membershipStatus;
+    }
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    public List<Transactions> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transactions> transactions) {
+        this.transactions = transactions;
     }
 }

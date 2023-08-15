@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.pahappa.systems.kimanyisacco.daos.MemberDAO;
 import org.pahappa.systems.kimanyisacco.daos.TransactionDAO;
+import org.pahappa.systems.kimanyisacco.models.Member;
 import org.pahappa.systems.kimanyisacco.models.Transactions;
 import org.pahappa.systems.kimanyisacco.services.TransactionService;
 
 public class TransactionServiceImpl implements TransactionService {
     private final TransactionDAO transactionDAO;
+    private MemberDAO memberDAO;
     private Map<String, Double> userAccountBalanceMap = new HashMap<>();
 
     public TransactionServiceImpl(TransactionDAO transactionDAO) {
@@ -19,11 +22,13 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void makeTransaction(String transactionType, double amount, String userEmail, double accountBalance) {
 
+        Member member = memberDAO.getMemberByEmail(userEmail);
+
         // Create a new Transaction instance
         Transactions transaction = new Transactions();
         transaction.setTransactionType(transactionType);
         transaction.setAmount(amount);
-        transaction.setSaccoMember(userEmail);
+        transaction.setMember(member);
         transaction.setAccountBalance(accountBalance);
 
         // Save the transaction to the repository

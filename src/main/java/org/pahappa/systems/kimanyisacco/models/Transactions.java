@@ -9,7 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,9 +24,7 @@ public class Transactions {
 
     private double amount;
 
-
-    private String saccoMember;
-
+    private Member member;
 
     private LocalDateTime createdOn;
 
@@ -61,14 +60,6 @@ public class Transactions {
         this.amount = amount;
     }
 
-    public String getSaccoMember() {
-        return saccoMember;
-    }
-
-    public void setSaccoMember(String saccoMember) {
-        this.saccoMember = saccoMember;
-    }
-
     @CreationTimestamp
     public LocalDateTime getCreatedOn() {
         return createdOn;
@@ -85,5 +76,15 @@ public class Transactions {
 
     public void setAccountBalance(double accountBalance) {
         this.accountBalance = accountBalance;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "saccoMember", referencedColumnName = "email")
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

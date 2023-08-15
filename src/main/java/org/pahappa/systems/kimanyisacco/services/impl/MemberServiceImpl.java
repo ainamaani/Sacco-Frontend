@@ -7,11 +7,9 @@ import org.pahappa.systems.kimanyisacco.models.Member;
 import org.pahappa.systems.kimanyisacco.models.Transactions;
 import org.pahappa.systems.kimanyisacco.services.MemberService;
 
-
 public class MemberServiceImpl extends TryService implements MemberService {
     private MemberDAO memberDAO;
 
-    
     @Override
     public void setMemberDAO(MemberDAO memberDAO) {
         this.memberDAO = memberDAO;
@@ -40,7 +38,7 @@ public class MemberServiceImpl extends TryService implements MemberService {
     @Override
     public void approveMember(Member member) {
         member.setMembershipStatus("Approved");
-        memberDAO.update(member); 
+        memberDAO.update(member);
     }
 
     @Override
@@ -55,11 +53,8 @@ public class MemberServiceImpl extends TryService implements MemberService {
 
     @Override
     public boolean isEmailExists(String email) {
-    Member existingMember = memberDAO.getMemberByEmail(email);
-    return existingMember != null;
-}
-
-    
-
+        Member existingMember = memberDAO.getMemberByEmail(email);
+        return existingMember != null;
+    }
 
 }

@@ -182,8 +182,8 @@ form p a{
                             <h:inputText id="fullname" placeholder="Enter your full name" value="#{memberBean.member.fullName}" class="input" />
                             <h:outputLabel for="gender" value="Gender" class="label" />
                             <h:selectOneMenu id="gender" value="#{memberBean.member.gender}" class="select">
-                                <f:selectItem itemLabel="Male" itemValue="male" class="option" />
-                                <f:selectItem itemLabel="Female" itemValue="female" class="option" />
+                                <f:selectItem itemLabel="Male" itemValue="MALE" class="option" />
+                                <f:selectItem itemLabel="Female" itemValue="FEMALE" class="option" />
                             </h:selectOneMenu>
                             <h:outputLabel for="dob" value="Date of birth" class="label" />
                             <p:datePicker
